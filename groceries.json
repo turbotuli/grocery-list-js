@@ -11,6 +11,14 @@
     {
       "name": "apples",
       "quantity": "5"
+    },
+    {
+      "name": "Beans",
+      "quantity": "1"
+    },
+    {
+      "name": "String Cheese",
+      "quantity": "5"
     }
   ]
 }

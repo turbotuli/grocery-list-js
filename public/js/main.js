@@ -3,7 +3,7 @@ let request = $.ajax({
   url: '/groceries.json'
 })
 
-request.done((data) => {
+let dataToHtml = (data) => {
   let groceries = JSON.parse(data)
   let groceryList = new GroceryList('', Date())
   groceries["groceries"].forEach((item) => {
@@ -12,9 +12,27 @@ request.done((data) => {
   })
 
   let html = groceryList.toHTML()
-  $("#main").append(html)
+  $("#main").html(html)
+}
+
+request.done((data) => {
+  dataToHtml(data)
 })
 
 $(document).ready(() => {
-  // Exceeds Expectation Part 2 Code Here
+  $('#submit').on('click', (event) => {
+    event.preventDefault()
+    let newItem = new GroceryItem($('#grocery_name').val(), $('#grocery_quantity').val())
+    let post = $.ajax({
+      method: 'POST',
+      data: { name: newItem.name, quantity: newItem.quantity },
+      url: '/groceries.json'
+    })
+
+    post.done(() => {
+      $('ul').append('<li>' + newItem.toString() + '</li>')
+      $('#grocery_name').val('')
+      $('#grocery_quantity').val('')
+    })
+  })
 })
