@@ -31,9 +31,6 @@ get '/groceries.json' do
 end
 
 post '/groceries.json' do
-  # body = request.body.read
-  # binding.pry
-  # json = JSON.parse(body)
   if !params["name"].empty?
     add_grocery(params)
 
